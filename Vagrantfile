@@ -120,11 +120,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   #   chef.validation_client_name = "ORGNAME-validator"
 
-  config.vm.define :director do |director|
-	  director.vm.hostname = "ds"
-	  director.vm.network :private_network, ip: "10.0.0.11"
-	  director.vm.provision "shell" , path: "ds.sh"
-  end 
+
   config.vm.define :actor do |actor|
 	  actor.vm.hostname = "rs1"
 	  actor.vm.network :private_network, ip: "10.0.0.2"
@@ -135,6 +131,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	  actress.vm.network :private_network, ip: "10.0.0.3"
 	  actress.vm.provision "shell" , path: "rs.sh"
   end
+  config.vm.define :director do |director|
+	  director.vm.hostname = "ds"
+	  director.vm.network :private_network, ip: "10.0.0.11"
+	  director.vm.provision "shell" , path: "ds.sh"
+  end 
+
   config.vm.define :fans do |fans|
 	  fans.vm.hostname = "cs"
 	  fans.vm.network :private_network, ip: "10.0.0.9"
