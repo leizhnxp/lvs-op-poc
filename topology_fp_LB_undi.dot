@@ -1,16 +1,29 @@
 graph FP_LB_HA {
-    "source a"--"director with ldirectord\nscheduler:rr"[label="vip:vport_a"];
-    "source b"--"director with ldirectord\nscheduler:rr"[label="vip:vport_b"];
-    "director with ldirectord\nscheduler:rr"--{"adapter a server 1","adapter a server 2"};
-    "director with ldirectord\nscheduler:rr"--{"adapter b server 1","adapter b server 2"};
+    source_a [label="source a"];
+    source_b [label="source b"];
+    director [label="director with ldirectord\nscheduler : rr"];
+    adapter_a_rs1 [label="adapter a server 1"];
+    adapter_a_rs2 [label="adapter a server 2"];
+    adapter_b_rs1 [label="adapter b server 1"];
+    adapter_b_rs2 [label="adapter b server 2"];
+    fp_grid [label="FP cluster"];
+    fp_pub_rs1 [label="FP publish node 1"];
+    fp_pub_rs2 [label="FP publish node 2"];
+    fp_pub_rs3 [label="FP publish node 3"];
+    DIRECTOR [label="DIRECTOR with ldirectord\nscheduler : rr"]
+    source_a--director[label="vip:vport_a"];
+    source_b--director[label="vip:vport_b"];
+    director--{adapter_a_rs1,adapter_a_rs2};
+    director--{adapter_b_rs1,adapter_b_rs2};
+    
     subgraph{
-        rank=same;"source a";"source b";    
+        rank=same;source_a;source_b;    
     }
     subgraph{
-        rank=same;"adapter b server 2";"adapter b server 1";"adapter a server 1";"adapter a server 2";    
+        rank=same;adapter_b_rs2;adapter_b_rs1;adapter_a_rs1;adapter_a_rs2;    
     }
-    {"adapter a server 1","adapter a server 2","adapter b server 1","adapter b server 2"}--"FP cluster";
-    "FP cluster"--{"FP publish node 1","FP publish node 2","FP publish node 3"};
-    {"FP publish node 1","FP publish node 2","FP publish node 3"}--"DIRECTOR with ldirectord";
-    "DIRECTOR with ldirectord"--{app1;app2;app3;app4}[label="VIP:VPORT_PUB"];
+    {adapter_a_rs1,adapter_a_rs2,adapter_b_rs1,adapter_b_rs2}--fp_grid;
+    fp_grid--{fp_pub_rs1,fp_pub_rs2,fp_pub_rs3};
+    {fp_pub_rs1,fp_pub_rs2,fp_pub_rs3}--DIRECTOR;
+    DIRECTOR--{app1;app2;app3;app4}[label="VIP:VPORT_PUB"];
 }
