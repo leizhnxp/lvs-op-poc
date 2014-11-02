@@ -1,0 +1,8 @@
+digraph VS_NAT {
+    client->director[headlabel="vip"];
+    director->client
+    director->realserver1;
+    director->realserver2;
+    realserver1->director;
+    realserver2->director;
+}

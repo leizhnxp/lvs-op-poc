@@ -1,0 +1,7 @@
+digraph VS_DR {
+    client->director[label="vip"];
+    director->realserver1;
+    director->realserver2;
+    realserver1->client[label="DR"];
+    realserver2->client[label="DR"];
+}
