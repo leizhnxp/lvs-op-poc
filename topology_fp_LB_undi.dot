@@ -1,0 +1,16 @@
+graph FP_LB_HA {
+    "source a"--"director with ldirectord\nscheduler:rr"[label="vip:vport_a"];
+    "source b"--"director with ldirectord\nscheduler:rr"[label="vip:vport_b"];
+    "director with ldirectord\nscheduler:rr"--{"adapter a server 1","adapter a server 2"};
+    "director with ldirectord\nscheduler:rr"--{"adapter b server 1","adapter b server 2"};
+    subgraph{
+        rank=same;"source a";"source b";    
+    }
+    subgraph{
+        rank=same;"adapter b server 2";"adapter b server 1";"adapter a server 1";"adapter a server 2";    
+    }
+    {"adapter a server 1","adapter a server 2","adapter b server 1","adapter b server 2"}--"FP cluster";
+    "FP cluster"--{"FP publish node 1","FP publish node 2","FP publish node 3"};
+    {"FP publish node 1","FP publish node 2","FP publish node 3"}--"DIRECTOR with ldirectord";
+    "DIRECTOR with ldirectord"--{app1;app2;app3;app4}[label="VIP:VPORT_PUB"];
+}
