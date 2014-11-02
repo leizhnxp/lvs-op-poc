@@ -42,7 +42,7 @@
 ### 后续
 
 * 一个长连接的service演示，其实蛮简单地：ncat -lk 8964 -c "xargs -n1 echo "，反而是现在那个短连接其实我现在不太理解是为什么，同样是echo，xargs之后就不会断了连接，还没深究
-* provision应该不是每次启动执行，
+* provision是不是每次reload或者up就執行，這個我还不确定，找机会得试下，这会影响PoC里的Mock Service的启动，这问题纯为完美
 * 加keepalived，防止LVS单点
 
 ### 
