@@ -1,0 +1,18 @@
+digraph FP_LB_HA {
+    source_a->director[label="vip:vport_a"];
+    source_b->director[label="vip:vport_b"];
+    director->{adapter_A_server1,adapter_A_server2};
+    director->{adapter_B_server1,adapter_B_server2};
+    {adapter_A_server1,adapter_A_server2}->source_a[label="DR"];
+    {adapter_B_server1,adapter_B_server2}->source_b[label="DR"];
+    subgraph{
+        rank=same;source_a;source_b;    
+    }
+    subgraph{
+        rank=same;adapter_B_server2;adapter_B_server1;adapter_A_server1;adapter_A_server2;    
+    }
+    {adapter_A_server1,adapter_A_server2,adapter_B_server1,adapter_B_server2}->FP_cluster;
+    FP_cluster->{FP_publish_node1,FP_publish_node2,FP_publish_node3};
+    {FP_publish_node1,FP_publish_node2,FP_publish_node3}->DIRECTOR;
+    DIRECTOR->{app1;app2;app3;app4}
+}

@@ -1,0 +1,29 @@
+graph FP_LB_HA {
+    source_a [label="source a"];
+    source_b [label="source b"];
+    director [label="director with ldirectord\nscheduler : rr"];
+    adapter_a_rs1 [label="adapter a server 1"];
+    adapter_a_rs2 [label="adapter a server 2"];
+    adapter_b_rs1 [label="adapter b server 1"];
+    adapter_b_rs2 [label="adapter b server 2"];
+    fp_grid [label="FP cluster"];
+    fp_pub_rs1 [label="FP publish node 1"];
+    fp_pub_rs2 [label="FP publish node 2"];
+    fp_pub_rs3 [label="FP publish node 3"];
+    DIRECTOR [label="DIRECTOR with ldirectord\nscheduler : rr"]
+    source_a--director[label="vip:vport_a"];
+    source_b--director[label="vip:vport_b"];
+    director--{adapter_a_rs1,adapter_a_rs2};
+    director--{adapter_b_rs1,adapter_b_rs2};
+    
+    subgraph{
+        rank=same;source_a;source_b;    
+    }
+    subgraph{
+        rank=same;adapter_b_rs2;adapter_b_rs1;adapter_a_rs1;adapter_a_rs2;    
+    }
+    {adapter_a_rs1,adapter_a_rs2,adapter_b_rs1,adapter_b_rs2}--fp_grid;
+    fp_grid--{fp_pub_rs1,fp_pub_rs2,fp_pub_rs3};
+    {fp_pub_rs1,fp_pub_rs2,fp_pub_rs3}--DIRECTOR;
+    DIRECTOR--{app1;app2;app3;app4}[label="VIP:VPORT_PUB"];
+}
