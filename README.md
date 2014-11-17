@@ -58,7 +58,7 @@
 	* 最重要的其实还是HA，LB是另一个副产品——有个备机，不如生产时候也用一下
 	* 针对LB，据敝人直接沟通，OP那边实际关心的**只是**负载调度策略，这个和业务系统多少有点关系，主要是根据业务特点，控制一下压力，我觉得这种玩意儿就是轮转，其他除非真的有规模，否则很有可能事与愿违
 	* 针对HA，这才是最重要的，直接上ldirectord，对rs检活，否则keepalived完事了，不用LB这个副产品
-* 这个过程中发现有人也像我一样把[这个过程](https://github.com/shkh/lvs-vagrant)置在github上，我参考了，甚至一度想在它[上面改](https://github.com/leizhnxp/lvs-vagrant)，但是它那个貌似不好用，而且脚本中每个步骤不甚明了，特别是特么的NAT的还改了路由表，这玩意儿那还能有意义吗？而且vagrant里它没有client，对VIP问题表达的不直接，所以放弃使用他的了
+* 这个过程中发现有人也像我一样把[这个过程](https://github.com/shkh/lvs-vagrant)置在github上，我参考了，甚至一度想在它[上面改](https://github.com/leizhnxp/lvs-vagrant)，但是它那个貌似不好用，而且脚本中每个步骤不甚明了，特别是~~特么的NAT的还改了路由表，这玩意儿那还能有意义吗？~~而且vagrant里它没有client，对VIP问题表达的不直接，所以放弃使用他的了
 * box的问题
 	* 一开始怎么整都不行的时候，难免以为自己制作的box有问题，毕竟心虚啊
 	* 后来用vagrant es上提供的box成功后换成自己的box发现应该没关系
