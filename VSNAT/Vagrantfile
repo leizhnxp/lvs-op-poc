@@ -123,23 +123,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define :actor do |actor|
 	  actor.vm.hostname = "rs1"
-	  actor.vm.network :private_network, ip: "10.0.1.2"
+	  actor.vm.network :private_network, ip: "192.168.1.11"
 	  actor.vm.provision "shell" , path: "rs.sh"
   end
   config.vm.define :actress do |actress|
 	  actress.vm.hostname = "rs2"
-	  actress.vm.network :private_network, ip: "10.0.1.3"
+	  actress.vm.network :private_network, ip: "192.168.1.12"
 	  actress.vm.provision "shell" , path: "rs.sh"
   end
   config.vm.define :director do |director|
 	  director.vm.hostname = "ds"
-	  director.vm.network :private_network, ip: "10.0.1.11"
+	  director.vm.network :private_network, ip: "192.168.1.9"
 	  director.vm.provision "shell" , path: "ds.sh"
   end 
 
   config.vm.define :fans do |fans|
 	  fans.vm.hostname = "cs"
-	  fans.vm.network :private_network, ip: "10.0.0.9"
+	  fans.vm.network :private_network, ip: "192.168.2.254"
 	  fans.vm.provision "shell" , path: "cs.sh"
   end
 
