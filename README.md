@@ -5,6 +5,7 @@
 * 看官都知道vagrant是怎么回事，了解，会基本使用
 * 能用google搜索LVS个大概其，知道存在DR、NAT、TUN，大致是咋回事
 
+
 ### POC要点
 
 * 要做TCP和UDP端点的负载均衡
